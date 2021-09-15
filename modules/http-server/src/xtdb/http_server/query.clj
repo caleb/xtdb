@@ -73,8 +73,9 @@
                              (cond-> el
                                (get entity-links el) (entity-ref/->EntityRef))))))))))
 
-(defn run-query [{:keys [link-entities? query]} in-args {:keys [xtdb-node valid-time tx-time]}]
+(defn run-query [{:keys [link-entities? query]} in-args {:keys [xtdb-node valid-time tx-id tx-time]}]
   (let [db (util/db-for-request xtdb-node {:valid-time valid-time
+                                           :tx-id tx-id
                                            :tx-time tx-time})]
     {:query query
      :valid-time (xt/valid-time db)
