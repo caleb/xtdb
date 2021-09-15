@@ -160,9 +160,10 @@
     (catch Exception e
       {:error e})))
 
-(defn search-entity [{:keys [xtdb-node]} {:keys [eid valid-time tx-time link-entities?]}]
+(defn search-entity [{:keys [xtdb-node]} {:keys [eid valid-time tx-id tx-time link-entities?]}]
   (try
     (let [db (util/db-for-request xtdb-node {:valid-time valid-time
+                                             :tx-id tx-id
                                              :tx-time tx-time})
           entity (xt/entity db eid)]
       (cond
